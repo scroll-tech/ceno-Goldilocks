@@ -2,7 +2,7 @@
 
 use std::{
     mem::transmute,
-    ops::{Mul, MulAssign},
+    ops::{Add, AddAssign, Mul, MulAssign, Sub, SubAssign},
 };
 
 use ff::Field;
@@ -15,6 +15,7 @@ use super::ExtensionField;
 impl Mul<&Goldilocks> for &GoldilocksExt2 {
     type Output = GoldilocksExt2;
 
+    #[inline]
     fn mul(self, rhs: &Goldilocks) -> Self::Output {
         let mut res = *self;
         res.mul_assign(rhs);
@@ -25,12 +26,24 @@ impl Mul<&Goldilocks> for &GoldilocksExt2 {
 impl Mul<Goldilocks> for GoldilocksExt2 {
     type Output = GoldilocksExt2;
 
+    #[inline]
     fn mul(self, rhs: Goldilocks) -> Self::Output {
         &self * &rhs
     }
 }
 
+impl<'a> Mul<&'a Goldilocks> for GoldilocksExt2 {
+    type Output = Self;
+
+    #[inline]
+    fn mul(mut self, rhs: &'a Goldilocks) -> Self::Output {
+        self *= rhs;
+        self
+    }
+}
+
 impl MulAssign<&Goldilocks> for GoldilocksExt2 {
+    #[inline]
     fn mul_assign(&mut self, rhs: &Goldilocks) {
         self.0[0] *= rhs;
         self.0[1] *= rhs;
@@ -38,8 +51,77 @@ impl MulAssign<&Goldilocks> for GoldilocksExt2 {
 }
 
 impl MulAssign<Goldilocks> for GoldilocksExt2 {
+    #[inline]
     fn mul_assign(&mut self, rhs: Goldilocks) {
         self.mul_assign(&rhs)
+    }
+}
+
+impl Add<Goldilocks> for GoldilocksExt2 {
+    type Output = Self;
+
+    #[inline]
+    fn add(mut self, rhs: Goldilocks) -> Self::Output {
+        self += &rhs;
+        self
+    }
+}
+
+impl<'a> Add<&'a Goldilocks> for GoldilocksExt2 {
+    type Output = Self;
+
+    #[inline]
+    fn add(mut self, rhs: &'a Goldilocks) -> Self::Output {
+        self += rhs;
+        self
+    }
+}
+
+impl AddAssign<Goldilocks> for GoldilocksExt2 {
+    #[inline]
+    fn add_assign(&mut self, rhs: Goldilocks) {
+        *self += &rhs;
+    }
+}
+
+impl<'a> AddAssign<&'a Goldilocks> for GoldilocksExt2 {
+    #[inline]
+    fn add_assign(&mut self, rhs: &'a Goldilocks) {
+        self.0[0] += rhs;
+    }
+}
+
+impl Sub<Goldilocks> for GoldilocksExt2 {
+    type Output = Self;
+
+    #[inline]
+    fn sub(mut self, rhs: Goldilocks) -> Self::Output {
+        self -= &rhs;
+        self
+    }
+}
+
+impl<'a> Sub<&'a Goldilocks> for GoldilocksExt2 {
+    type Output = Self;
+
+    #[inline]
+    fn sub(mut self, rhs: &'a Goldilocks) -> Self::Output {
+        self -= rhs;
+        self
+    }
+}
+
+impl SubAssign<Goldilocks> for GoldilocksExt2 {
+    #[inline]
+    fn sub_assign(&mut self, rhs: Goldilocks) {
+        *self -= &rhs;
+    }
+}
+
+impl<'a> SubAssign<&'a Goldilocks> for GoldilocksExt2 {
+    #[inline]
+    fn sub_assign(&mut self, rhs: &'a Goldilocks) {
+        self.0[0] -= rhs;
     }
 }
 
