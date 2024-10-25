@@ -14,9 +14,9 @@ pub const EPSILON: u64 = 0xffffffff;
 pub struct Goldilocks(pub u64);
 
 /// Degree 2 Goldilocks extension field mod x^2 - 7
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize, Hash)]
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize, Hash, PartialOrd, Ord)]
 pub struct GoldilocksExt2(pub [Goldilocks; 2]);
 
 /// Degree 3 Goldilocks extension field mod x^3-x-1
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize, Hash)]
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize, Hash, PartialOrd, Ord)]
 pub struct GoldilocksExt3(pub [Goldilocks; 3]);

@@ -2,6 +2,7 @@
 
 use core::iter::{Product, Sum};
 use core::ops::{Add, AddAssign, Mul, MulAssign, Neg, Sub, SubAssign};
+use std::cmp::Ordering;
 use std::fmt::{Display, Formatter};
 use std::hash::{Hash, Hasher};
 use std::io::{Read, Write};
@@ -102,6 +103,18 @@ impl PartialEq for Goldilocks {
 }
 
 impl Eq for Goldilocks {}
+
+impl PartialOrd for Goldilocks {
+    fn partial_cmp(&self, other: &Goldilocks) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for Goldilocks {
+    fn cmp(&self, other: &Goldilocks) -> Ordering {
+        self.to_canonical_u64().cmp(&other.to_canonical_u64())
+    }
+}
 
 impl Hash for Goldilocks {
     fn hash<H: Hasher>(&self, hasher: &mut H) {
