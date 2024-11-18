@@ -18,7 +18,7 @@ use crate::{ExtensionField, Goldilocks, GoldilocksExt2};
 ///    + a1*b1 + 7*a2*b2
 
 /// This requires 9 multiplications and 6 1 additions
-fn mul_internal(a: &GoldilocksExt2, b: &GoldilocksExt2) -> GoldilocksExt2 {
+pub fn mul_internal(a: &GoldilocksExt2, b: &GoldilocksExt2) -> GoldilocksExt2 {
     // todo: optimizations?
     let a1b1 = a.0[0] * b.0[0];
     let a1b2 = a.0[0] * b.0[1];
