@@ -29,11 +29,6 @@ impl ExtensionField for Goldilocks {
         unimplemented!("use SmallField::to_canonical_u64() instead")
     }
 
-    /// Convert self to limbs of Goldilocks elements
-    fn to_limbs(&self) -> [Self::BaseField; <Self as ExtensionField>::DEGREE] {
-        unimplemented!("use Vec<self> instead")
-    }
-
     /// Reference to limbs
     fn as_limbs(&self) -> &[Self::BaseField] {
         unimplemented!("use &[*self] instead")
@@ -47,5 +42,12 @@ impl ExtensionField for Goldilocks {
     /// Build a self from a base element; pad ext with 0s.
     fn from_base(b: &Self::BaseField) -> Self {
         *b
+    }
+}
+
+impl Goldilocks {
+    /// Convert self to limbs of Goldilocks elements
+    fn to_limbs(&self) -> [<Self as ExtensionField>::BaseField; <Self as ExtensionField>::DEGREE] {
+        unimplemented!("use Vec<self> instead")
     }
 }

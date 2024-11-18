@@ -76,11 +76,6 @@ impl ExtensionField for GoldilocksExt3 {
         unsafe { transmute::<&[Goldilocks], &[u64]>(self.0.as_slice()) }
     }
 
-    /// Convert self to limbs of Goldilocks elements
-    fn to_limbs(&self) -> [Self::BaseField; <Self as ExtensionField>::DEGREE] {
-        self.0
-    }
-
     /// Reference to limbs
     fn as_limbs(&self) -> &[Self::BaseField] {
         self.0.as_slice()
@@ -94,5 +89,12 @@ impl ExtensionField for GoldilocksExt3 {
     /// Build a self from a base element; pad ext with 0s.
     fn from_base(b: &Self::BaseField) -> Self {
         Self([*b, Goldilocks::ZERO, Goldilocks::ZERO])
+    }
+}
+
+impl GoldilocksExt3 {
+    /// Convert self to limbs of Goldilocks elements
+    fn to_limbs(&self) -> [<Self as ExtensionField>::BaseField; <Self as ExtensionField>::DEGREE] {
+        self.0
     }
 }

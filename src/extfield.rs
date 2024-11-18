@@ -41,10 +41,7 @@ pub trait ExtensionField:
 
     /// Convert a field elements to a u64 vector. Do not normalize it.
     fn as_non_canonical_u64_slice(&self) -> &[u64];
-
-    /// Convert self to limbs of Goldilocks elements
-    fn to_limbs(&self) -> [Self::BaseField; Self::DEGREE];
-
+    
     /// Reference to limbs
     fn as_limbs(&self) -> &[Self::BaseField];
 

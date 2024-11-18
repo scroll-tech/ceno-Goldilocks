@@ -1,6 +1,6 @@
 use criterion::{criterion_group, criterion_main, Criterion};
 use ff::Field;
-use goldilocks::{ExtensionField, Goldilocks, GoldilocksExt2, GoldilocksExt3, SmallField};
+use ceno_goldilocks::{ExtensionField, Goldilocks, GoldilocksExt2, GoldilocksExt3, SmallField};
 use halo2curves::bn256::Fr;
 use rand_core::SeedableRng;
 use rand_xorshift::XorShiftRng;
